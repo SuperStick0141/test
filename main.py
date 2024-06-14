@@ -1,38 +1,13 @@
 from typing import Optional
-
 from fastapi import FastAPI
-
+from fastapi.responses import HTMLResponse #インポート
+import random  # randomライブラリを追加
 app = FastAPI()
 
 
 @app.get("/")
 async def root():
     return {"message": "Hellooooooooooooooooooooooo World"}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
-
-
-
-
-
-
-
-
-    from typing import Optional
-
-from fastapi import FastAPI
-
-import random  # randomライブラリを追加
-
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
@@ -51,5 +26,24 @@ def omikuji():
         "小凶",
         "大凶"
     ]
-
     return omikuji_list[random.randrange(10)]
+
+@app.get("/index")
+def index():
+    html_content = """
+    <html>
+        <head>
+   <meta charset="utf-8">
+   <title>タイトル</title>
+</head> 
+
+<body>
+	<h1 class="titleA1">こんにちは！！</h1>
+	<p>暑くなりました。夏です。</p>
+	<br clear="left">
+
+	<h2 class="titleA2">疲れた</h2>
+	</body>
+</html>
+    """
+    return HTMLResponse(content=html_content, status_code=200)
