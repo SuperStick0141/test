@@ -48,8 +48,3 @@ def index():
     """
     return HTMLResponse(content=html_content, status_code=200)
 
-
-
-@app.post("/present")
-def new_naming(present):
-    return {"response": f"サーバです。メリークリスマス！ {present}ありがとう。お返しはキャンディーです。"}
